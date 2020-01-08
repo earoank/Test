@@ -1,0 +1,13 @@
+---
+- name: "HIGH | RHEL-07-010270 | PATCH | The
+SSH daemon must not allow authentication using
+an empty password."
+ lineinfile:
+ state: present
+ dest: /etc/ssh/sshd_config
+ regexp: ^#?PermitEmptyPasswords
+ line: PermitEmptyPasswords no
+ validate: sshd -tf %s
+ notify: restart sshd
+
+... 
